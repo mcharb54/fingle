@@ -50,16 +50,24 @@
         button:hover {
           background-color: #ddd;
         }
-      
+/*       
         button.pressed {
           background-color: #ddd;
           box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+        } */
+
+        button.pressed {
+        background-color: #007BFF;
+        color: white;
         }
-      
+
         #submitFingers {
           margin-top: 16px;
         }
-      
+
+        #submitGuess {
+          margin-top: 16px;
+        }
         /* Mobile Styles */
         @media (max-width: 768px) {
           h1, h2 {
@@ -78,13 +86,16 @@
 <body>
     <div class="container">
         <h1 id="welcome">Welcome to Fingle!</h1>
-        <p id="roundInfo"></p>
+        <p id="roundInfo"> 
         
         <div id="round1">
-            <!-- <input type="text" id="userGuess" placeholder="Enter your guess"> -->
-            <input type="tel" id="userGuess" name="userGuess" pattern="[1-5]" required>
-            <button onclick="submitGuess()">Submit</button>
-        </div>
+            <button onclick="selectRound1Number(1)">One</button>
+            <button onclick="selectRound1Number(2)">Two</button>
+            <button onclick="selectRound1Number(3)">Three</button>
+            <button onclick="selectRound1Number(4)">Four</button>
+            <button onclick="selectRound1Number(5)">Five</button>
+            <button id="submitGuess" onclick="submitGuess()">Submit</button>
+          </div>  
         
         <div id="round2" style="display: none;">
         <button id="thumb" onclick="toggleFinger('Thumb')">Thumb</button>
@@ -137,3 +148,4 @@
 </body>
 
 </html>
+
