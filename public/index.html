@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Fingle Game</title>
     <style>
         body {
@@ -22,17 +22,19 @@
         }
       
         .container {
-          max-width: 100%; /* Ensures container doesn't go past browser borders */
+          max-width: 600px; /* Limit the maximum width of the container */
           width: 100%;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
+          padding: 0 16px; /* Add padding to the container */
         }
       
         h1, h2 {
           color: #1e90ff;
           margin-bottom: 16px;
+          text-align: center; /* Center the headings */
         }
       
         button {
@@ -62,7 +64,6 @@
         @media (max-width: 768px) {
           h1, h2 {
             font-size: 24px;
-            text-align: center;
           }
       
           button {
@@ -72,9 +73,6 @@
           }
         }
       </style>
-      
-      
-
 </head>
 
 <body>
@@ -83,7 +81,8 @@
         <p id="roundInfo"></p>
         
         <div id="round1">
-            <input type="text" id="userGuess" placeholder="Enter your guess">
+            <!-- <input type="text" id="userGuess" placeholder="Enter your guess"> -->
+            <input type="tel" id="userGuess" name="userGuess" pattern="[1-5]" required>
             <button onclick="submitGuess()">Submit</button>
         </div>
         
