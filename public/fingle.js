@@ -8,13 +8,14 @@ function updateRoundInfo(userGuess) {
     if (round === 1) {
         roundInfo.style.display = "block";
         roundInfo.innerText = "Round 1: How many fingers am I holding up?";
-    } else if (round === 2) {
-        roundInfo.style.display = "block";
-        roundInfo.innerText = `Correct! The answer was ${userGuess}. \n Which fingers am I holding up?`;
-    }
-    else if (round === 3) {
-        roundInfo.style.display = "none";
-    }
+    } else
+        if (round === 2) {
+            roundInfo.style.display = "block";
+            roundInfo.innerText = `Correct! The answer was ${userGuess}. \n Which fingers am I holding up?`;
+        }
+        else if (round === 3) {
+            roundInfo.style.display = "none";
+        }
 }
 
 function generateNPCNumber() {
@@ -30,14 +31,25 @@ function generateNPCFingers() {
     }
 }
 
+function selectRound1Number(number) {
+    const buttons = document.querySelectorAll("#round1 button:not(#submitGuess)");
+    buttons.forEach((button, index) => {
+        if (index + 1 === number) {
+            button.classList.add("pressed");
+        } else {
+            button.classList.remove("pressed");
+        }
+    });
+    round1SelectedNumber = number;
+}
+
 function submitGuess() {
-    const userGuess = document.getElementById("userGuess").value;
     const result = document.getElementById("result");
 
     if (round === 1) {
-        if (parseInt(userGuess) === npcNumber) {
+        if (round1SelectedNumber === npcNumber) {
             round = 2;
-            updateRoundInfo(userGuess);
+            updateRoundInfo(round1SelectedNumber);
             generateNPCFingers();
             document.getElementById("round1").style.display = "none";
             document.getElementById("round2").style.display = "block";
@@ -51,23 +63,24 @@ function submitGuess() {
     }
 }
 
+
 function submitFingerSelection() {
     const result = document.getElementById("result");
     userSelectedFingers.sort();
     npcFingers.sort();
-  
+
     document.getElementById("roundInfo").style.display = "none"; // Hide round info after guess
-  
+
     if (arraysEqual(npcFingers, userSelectedFingers)) {
-      document.getElementById("round2").style.display = "none"; // Hide the round 2 div
-      document.getElementById("winningMessage").style.display = "block"; // Show winning message
+        document.getElementById("round2").style.display = "none"; // Hide the round 2 div
+        document.getElementById("winningMessage").style.display = "block"; // Show winning message
     } else {
-      result.innerText = `Wrong! The correct finger combination was ${npcFingers.join(", ")}.`;
-      document.getElementById("round2").style.display = "none"; // Hide the round 2 div
-      document.getElementById("gameOver").style.display = "block";
+        result.innerText = `Wrong! The correct finger combination was ${npcFingers.join(", ")}.`;
+        document.getElementById("round2").style.display = "none"; // Hide the round 2 div
+        document.getElementById("gameOver").style.display = "block";
     }
-  }
-  
+}
+
 
 
 function toggleFinger(finger) {
@@ -86,6 +99,7 @@ function resetGame() {
     userSelectedFingers = [];
     generateNPCNumber();
     updateRoundInfo();
+    document.getElementById("welcome").style.display = "block";
     document.getElementById("round1").style.display = "block";
     document.getElementById("round2").style.display = "none";
     document.getElementById("gameOver").style.display = "none";
@@ -93,13 +107,13 @@ function resetGame() {
     document.getElementById("result").innerText = "";
     document.getElementById("userGuess").value = "";
     document.getElementById("welcome").style.display = "block"; // Show welcome info
-  
+
     const fingerButtons = document.querySelectorAll("#round2 button");
     for (const button of fingerButtons) {
-      button.classList.remove("pressed");
+        button.classList.remove("pressed");
     }
-  }
-  
+}
+
 
 function arraysEqual(a, b) {
     return a.length === b.length && a.every((val, index) => val === b[index]);
