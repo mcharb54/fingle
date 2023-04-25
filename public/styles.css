@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    padding: 16px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  .container {
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+  }
+  
+  h1, h2 {
+    color: #1e90ff;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  
+  button {
+    padding: 8px 16px;
+    margin-bottom: 8px;
+    border: 2px solid #555;
+    border-radius: 4px;
+    background-color: #f2f2f2;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  button:hover {
+    background-color: #ddd;
+  }
+  
+  button.pressed {
+    background-color: #007BFF;
+    color: white;
+  }
+  
+  #submitFingers {
+    margin-top: 16px;
+  }
+  
+  #submitGuess {
+    margin-top: 16px;
+  }
+  
+  @media (max-width: 768px) {
+    h1, h2 {
+      font-size: 24px;
+    }
+  
+    button {
+      font-size: 14px;
+      padding: 6px 12px;
+      width: 100%;
+    }
+  }
+  
