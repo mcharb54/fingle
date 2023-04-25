@@ -5,82 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Fingle Game</title>
-    <style>
-        body {
-          font-family: Arial, sans-serif;
-          background-color: #f0f8ff;
-          color: #333;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          height: 100vh;
-          margin: 0;
-          padding: 16px;
-          box-sizing: border-box;
-          overflow: hidden; /* Prevents scrolling */
-        }
-      
-        .container {
-          max-width: 600px; /* Limit the maximum width of the container */
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          padding: 0 16px; /* Add padding to the container */
-        }
-      
-        h1, h2 {
-          color: #1e90ff;
-          margin-bottom: 16px;
-          text-align: center; /* Center the headings */
-        }
-      
-        button {
-          padding: 8px 16px;
-          margin-bottom: 8px;
-          border: 2px solid #555;
-          border-radius: 4px;
-          background-color: #f2f2f2;
-          cursor: pointer;
-          outline: none;
-        }
-      
-        button:hover {
-          background-color: #ddd;
-        }
-/*       
-        button.pressed {
-          background-color: #ddd;
-          box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
-        } */
-
-        button.pressed {
-        background-color: #007BFF;
-        color: white;
-        }
-
-        #submitFingers {
-          margin-top: 16px;
-        }
-
-        #submitGuess {
-          margin-top: 16px;
-        }
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-          h1, h2 {
-            font-size: 24px;
-          }
-      
-          button {
-            font-size: 14px;
-            padding: 6px 12px;
-            width: 100%;
-          }
-        }
-      </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -116,9 +41,13 @@
         <div id="winningMessage" style="display: none;">
             <h2>Congratulations! You win!</h2>
             <button onclick="resetGame()">Play Again</button>
+            <br>
+            <p id="note">*The Computer's selection resets when you select "Play Again"</p>
           </div>
+        
+          <p id="result"></p>
       
-        <p id="result"></p>
+        
       </div>
 
     <script src="fingle.js"></script>

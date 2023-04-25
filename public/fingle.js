@@ -45,20 +45,21 @@ function selectRound1Number(number) {
 
 function submitGuess() {
     const result = document.getElementById("result");
+    generateNPCFingers();
 
     if (round === 1) {
         if (round1SelectedNumber === npcNumber) {
             round = 2;
             updateRoundInfo(round1SelectedNumber);
-            generateNPCFingers();
             document.getElementById("round1").style.display = "none";
             document.getElementById("round2").style.display = "block";
             document.getElementById("welcome").style.display = "none"; // Hide welcome info
         } else {
-            document.getElementById("round1").style.display = "none"; // Hide the round 1 div
-            document.getElementById("roundInfo").style.display = "none";
-            document.getElementById("gameOver").style.display = "block";
+            result.innerText = `Wrong! The correct answer was ${npcNumber}: (${npcFingers.join(", ")}).`;
             document.getElementById("welcome").style.display = "none"; // Hide welcome info
+            document.getElementById("round1").style.display = "none"; // Hide the round 1 div
+            document.getElementById("roundInfo").style.display = "none"; // Hide roundInfo
+            document.getElementById("gameOver").style.display = "block";
         }
     }
 }
@@ -75,7 +76,7 @@ function submitFingerSelection() {
         document.getElementById("round2").style.display = "none"; // Hide the round 2 div
         document.getElementById("winningMessage").style.display = "block"; // Show winning message
     } else {
-        result.innerText = `Wrong! The correct finger combination was ${npcFingers.join(", ")}.`;
+        result.innerText = `Wrong! The correct answer was ${npcNumber}: (${npcFingers.join(", ")}).`;
         document.getElementById("round2").style.display = "none"; // Hide the round 2 div
         document.getElementById("gameOver").style.display = "block";
     }
@@ -94,6 +95,27 @@ function toggleFinger(finger) {
     }
 }
 
+
+
+function resetGame() {
+    // Existing reset code
+  
+    // Remove 'pressed' class from Round 1 buttons
+    const round1Buttons = document.querySelectorAll("#round1 button");
+    round1Buttons.forEach((button) => {
+      button.classList.remove("pressed");
+    });
+  
+    // Remove 'pressed' class from Round 2 buttons
+    const round2Buttons = document.querySelectorAll("#round2 button");
+    round2Buttons.forEach((button) => {
+      button.classList.remove("pressed");
+    });
+  
+    // Reset round1SelectedNumber
+    round1SelectedNumber = null;
+  }
+
 function resetGame() {
     round = 1;
     userSelectedFingers = [];
@@ -101,12 +123,24 @@ function resetGame() {
     updateRoundInfo();
     document.getElementById("welcome").style.display = "block";
     document.getElementById("round1").style.display = "block";
+    // Remove 'pressed' class from Round 1 buttons
+    const round1Buttons = document.querySelectorAll("#round1 button");
+    round1Buttons.forEach((button) => {
+        button.classList.remove("pressed");
+    });
     document.getElementById("round2").style.display = "none";
+    // Remove 'pressed' class from Round 2 buttons
+    const round2Buttons = document.querySelectorAll("#round2 button");
+    round2Buttons.forEach((button) => {
+        button.classList.remove("pressed");
+    });
     document.getElementById("gameOver").style.display = "none";
     document.getElementById("winningMessage").style.display = "none"; // Hide winning message
     document.getElementById("result").innerText = "";
     document.getElementById("userGuess").value = "";
     document.getElementById("welcome").style.display = "block"; // Show welcome info
+    // Reset round1SelectedNumber
+    round1SelectedNumber = null;
 
     const fingerButtons = document.querySelectorAll("#round2 button");
     for (const button of fingerButtons) {
@@ -116,8 +150,13 @@ function resetGame() {
 
 
 function arraysEqual(a, b) {
+    // Sort the arrays
+    a.sort();
+    b.sort();
+  
+    // Check if both arrays have the same length and values in the same order
     return a.length === b.length && a.every((val, index) => val === b[index]);
-}
-
+  }
+  
 generateNPCNumber();
 updateRoundInfo();
